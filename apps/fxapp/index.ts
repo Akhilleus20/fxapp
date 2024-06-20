@@ -1,44 +1,32 @@
-import { Notifier, Ledger, JSON } from '@klave/sdk';
-import { FetchInput, FetchOutput, StoreInput, StoreOutput, ErrorMessage } from './types';
+import { Notifier, JSON, HttpRequest, HTTP } from '@klave/sdk';
+import { ErrorMessage, FxRateData, FxRateResult } from './types';
 
-const myTableName = "my_storage_table";
 
 /**
  * @query
- * @param {FetchInput} input - A parsed input argument
  */
-export function fetchValue(input: FetchInput): void {
+export function grabFxRates(): void {
 
-    let value = Ledger.getTable(myTableName).get(input.key);
-    if (value.length === 0) {
+    const query: HttpRequest = {
+        hostname: 'fx.monilytics.org',
+        port: 443,
+        path: '/?from=USD&to=EUR,GBP,CHF',
+        headers: [],
+        body: ''
+    };
+
+    const response = HTTP.request(query);
+    if (!response) {
         Notifier.sendJson<ErrorMessage>({
             success: false,
-            message: `key '${input.key}' not found in table`
-        });
-    } else {
-        Notifier.sendJson<FetchOutput>({
-            success: true,
-            value
-        });
-    }
-}
-
-/**
- * @transaction
- * @param {StoreInput} input - A parsed input argument
- */
-export function storeValue(input: StoreInput): void {
-
-    if (input.key && input.value) {
-        Ledger.getTable(myTableName).set(input.key, input.value);
-        Notifier.sendJson<StoreOutput>({
-            success: true
+            message: `HTTP call went wrong !`
         });
         return;
     }
 
-    Notifier.sendJson<ErrorMessage>({
-        success: false,
-        message: `Missing value arguments`
+    const ratesData = JSON.parse<FxRateData>(response.body);
+    Notifier.sendJson<FxRateResult>({
+        success: true,
+        rates: ratesData
     });
-}
+};

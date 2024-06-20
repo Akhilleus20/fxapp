@@ -6,24 +6,25 @@ export class ErrorMessage {
     message!: string;
 }
 
+// @ts-ignore
 @serializable
-export class FetchInput {
-    key!: string;
+export class FxRateDataResult {
+    EUR!: number;
+    GBP!: number;
+    CHF!: number;
 }
 
+// @ts-ignore
 @serializable
-export class FetchOutput {
+export class FxRateData {
+    base!: string;
+    results!: FxRateDataResult;
+    updated!: string;
+}
+
+// @ts-ignore
+@serializable
+export class FxRateResult {
     success!: boolean;
-    value!: string;
-}
-
-@serializable
-export class StoreInput {
-    key!: string;
-    value!: string;
-}
-
-@serializable
-export class StoreOutput {
-    success!: boolean;
+    rates!: FxRateData;
 }
