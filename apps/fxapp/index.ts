@@ -25,11 +25,14 @@ export function grabRandomInt(input: string): void {
         return;
     }
 
-    const randNumbers = JSON.parse<NumberVect>(response.body);
-    Notifier.sendJson<NumberVectResult>({
-        success: true,
-        vect: randNumbers
-    });
+    // const randNumbers = JSON.parse<NumberVect>(response.body);
+    // Notifier.sendJson<NumberVectResult>({
+    //     success: true,
+    //     vect: randNumbers
+    // });
+    Notifier.sendJson<string>(
+             response.body
+         );
 };
 
 /**
