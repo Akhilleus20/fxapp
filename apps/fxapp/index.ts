@@ -9,9 +9,9 @@ const myTableName = "my_storage_table";
 export function grabRandomInt(input: string): void {
 
     const query: HttpRequest = {
-        hostname: 'www.api.coindesk.com',
+        hostname: 'www.randomnumberapi.com',
         port: 443,
-        path: '/v1/bpi/currentprice.json',
+        path: '/api/v1.0/random?min=100&max=1000&count=5',
         headers: [],
         body: ''
     };
