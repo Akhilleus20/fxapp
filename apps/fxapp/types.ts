@@ -40,3 +40,14 @@ export class NumberVectResult {
     success!: boolean;
     vect!: NumberVect;
 }
+
+@serializable
+export class FetchInput {
+    key!: string;
+}
+
+@serializable
+export class FetchOutput {
+    success!: boolean;
+    value!: string;
+}
