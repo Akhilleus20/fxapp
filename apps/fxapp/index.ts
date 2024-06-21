@@ -9,7 +9,7 @@ const myTableName = "my_storage_table";
 export function grabRandomInt(input: string): void {
 
     const query: HttpRequest = {
-        hostname: 'randomnumberapi.com',
+        hostname: 'https://www.randomnumberapi.com',
         port: 443,
         path: '/api/v1.0/random?min=100&max=1000&count=5',
         headers: [],
