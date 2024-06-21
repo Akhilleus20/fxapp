@@ -38,7 +38,7 @@ export class NumberVect {
 @serializable
 export class NumberVectResult {
     success!: boolean;
-    vect!: NumberVect;
+    vect!: string;
 }
 
 @serializable
