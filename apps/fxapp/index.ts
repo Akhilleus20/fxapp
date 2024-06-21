@@ -5,7 +5,7 @@ import { ErrorMessage, NumberVect, NumberVectResult } from './types';
 /**
  * @query
  */
-export function grabRandomInt(): void {
+export function grabRandomInt(input: string): void {
 
     const query: HttpRequest = {
         hostname: 'randomnumberapi.com',
