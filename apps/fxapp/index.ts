@@ -1,5 +1,5 @@
 import { Notifier, JSON, HttpRequest, HTTP } from '@klave/sdk';
-import { ErrorMessage, FxRateData, FxRateResult, NumberVect, NumberVectResult } from './types';
+import { ErrorMessage, NumberVect, NumberVectResult } from './types';
 
 
 /**
@@ -10,7 +10,7 @@ export function grabFxRates(): void {
     const query: HttpRequest = {
         hostname: 'randomnumberapi.com',
         port: 443,
-        path: 'api/v1.0/random?min=100&max=1000&count=5',
+        path: '/api/v1.0/random?min=100&max=1000&count=5',
         headers: [],
         body: ''
     };
