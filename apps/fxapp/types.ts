@@ -6,48 +6,39 @@ export class ErrorMessage {
     message!: string;
 }
 
-// @ts-ignore
 @serializable
-export class FxRateDataResult {
-    EUR!: number;
-    GBP!: number;
-    CHF!: number;
-}
-
-// @ts-ignore
-@serializable
-export class FxRateData {
-    base!: string;
-    results!: FxRateDataResult;
+export class TimeStructure {
     updated!: string;
+    updatedISO!: string;
+    updateduk!: string;
 }
 
-// @ts-ignore
 @serializable
-export class FxRateResult {
+export class BitcoinPrice {
+    code!: string;
+    symbol!: string;
+    rate!: string;
+    description!: string;
+    rate_float!: number;
+}
+
+@serializable
+export class BitcoinPrices {
+    USD!: BitcoinPrice;
+    GBP!: BitcoinPrice;
+    EUR!: BitcoinPrice;
+}
+
+@serializable
+export class BitcoinPriceStructure {
+    time!: TimeStructure;
+    disclaimer!: string;
+    chartName!: string;
+    bpi!: BitcoinPrices
+}
+
+@serializable
+export class BitcoinPriceResult {
     success!: boolean;
-    rates!: FxRateData;
-}
-
-// @ts-ignore
-@serializable
-export class NumberVect {
-    vect!: i32[];
-}
-
-@serializable
-export class NumberVectResult {
-    success!: boolean;
-    vect!: string;
-}
-
-@serializable
-export class FetchInput {
-    key!: string;
-}
-
-@serializable
-export class FetchOutput {
-    success!: boolean;
-    value!: string;
+    bitcoinPrice!: BitcoinPriceStructure;
 }

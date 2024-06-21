@@ -1,7 +1,5 @@
-import { Notifier, Ledger, JSON, HttpRequest, HTTP } from '@klave/sdk';
-import { ErrorMessage, FetchInput, FetchOutput, NumberVect, NumberVectResult } from './types';
-
-const myTableName = "my_storage_table";
+import { Notifier, JSON, HttpRequest, HTTP } from '@klave/sdk';
+import { BitcoinPriceResult, BitcoinPriceStructure, ErrorMessage } from './types';
 
 /**
  * @query
@@ -25,28 +23,9 @@ export function grabRandomInt(input: string): void {
         return;
     }
 
-    Notifier.sendJson<NumberVectResult>({
+    const bitcoinPriceStructure = JSON.parse<BitcoinPriceStructure>(response.body);
+    Notifier.sendJson<BitcoinPriceResult>({
         success: true,
-        vect: response.body
+        bitcoinPrice: bitcoinPriceStructure
     });
 };
-
-/**
- * @query
- * @param {FetchInput} input - A parsed input argument
- */
-export function fetchValue(input: FetchInput): void {
-
-    let value = Ledger.getTable(myTableName).get(input.key);
-    if (value.length === 0) {
-        Notifier.sendJson<ErrorMessage>({
-            success: false,
-            message: `key '${input.key}' not found in table`
-        });
-    } else {
-        Notifier.sendJson<FetchOutput>({
-            success: true,
-            value
-        });
-    }
-}
