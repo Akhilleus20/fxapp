@@ -1,5 +1,5 @@
 import { Notifier, JSON, HttpRequest, HTTP } from '@klave/sdk';
-import { ErrorMessage, FxRateData, FxRateResult } from './types';
+import { ErrorMessage, FxRateData, FxRateResult, NumberVect, NumberVectResult } from './types';
 
 
 /**
@@ -8,9 +8,9 @@ import { ErrorMessage, FxRateData, FxRateResult } from './types';
 export function grabFxRates(): void {
 
     const query: HttpRequest = {
-        hostname: 'fx.monilytics.org',
+        hostname: 'randomnumberapi.com',
         port: 443,
-        path: '/?from=USD&to=EUR,GBP,CHF',
+        path: 'api/v1.0/random?min=100&max=1000&count=5',
         headers: [],
         body: ''
     };
@@ -24,9 +24,9 @@ export function grabFxRates(): void {
         return;
     }
 
-    const ratesData = JSON.parse<FxRateData>(response.body);
-    Notifier.sendJson<FxRateResult>({
+    const randNumbers = JSON.parse<NumberVect>(response.body);
+    Notifier.sendJson<NumberVectResult>({
         success: true,
-        rates: ratesData
+        vect: randNumbers
     });
 };

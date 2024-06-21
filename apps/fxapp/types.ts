@@ -28,3 +28,15 @@ export class FxRateResult {
     success!: boolean;
     rates!: FxRateData;
 }
+
+// @ts-ignore
+@serializable
+export class NumberVect {
+    vect!: i32[];
+}
+
+@serializable
+export class NumberVectResult {
+    success!: boolean;
+    vect!: NumberVect;
+}
